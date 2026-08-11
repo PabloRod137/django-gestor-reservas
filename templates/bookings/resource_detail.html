@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}{{ resource.name }}{% endblock %}
+{% block content %}
+<h1 class="h3">{{ resource.name }}</h1>
+<p class="text-muted">{{ resource.location }}</p>
+<p>{{ resource.description }}</p>
+<p><strong>Aforo:</strong> {{ resource.capacity }}</p>
+
+{% if user.is_authenticated %}
+    <a href="{% url 'booking_create' %}" class="btn btn-primary mb-4">Reservar este recurso</a>
+{% endif %}
+
+<h2 class="h5">Disponibilidad semanal</h2>
+{% if availabilities %}
+<table class="table table-sm">
+    <thead><tr><th>Día</th><th>Desde</th><th>Hasta</th></tr></thead>
+    <tbody>
+    {% for slot in availabilities %}
+        <tr>
+            <td>{{ slot.get_weekday_display }}</td>
+            <td>{{ slot.start_time|time:"H:i" }}</td>
+            <td>{{ slot.end_time|time:"H:i" }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p>Sin franjas de disponibilidad definidas.</p>
+{% endif %}
+
+<h2 class="h5 mt-4">Próximas reservas</h2>
+{% if upcoming_bookings %}
+<ul class="list-group">
+    {% for booking in upcoming_bookings %}
+        <li class="list-group-item d-flex justify-content-between">
+            <span>{{ booking.start_datetime|date:"d/m/Y H:i" }} - {{ booking.end_datetime|date:"H:i" }}</span>
+            <span class="text-muted">{{ booking.user.username }}</span>
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>No hay reservas próximas para este recurso.</p>
+{% endif %}
+{% endblock %}

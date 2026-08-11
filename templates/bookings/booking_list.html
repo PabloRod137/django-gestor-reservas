@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Mis reservas{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Mis reservas</h1>
+    <a href="{% url 'booking_create' %}" class="btn btn-primary">Nueva reserva</a>
+</div>
+
+{% if bookings %}
+<table class="table">
+    <thead>
+        <tr><th>Recurso</th><th>Inicio</th><th>Fin</th><th>Estado</th><th>Recurrencia</th><th></th></tr>
+    </thead>
+    <tbody>
+    {% for booking in bookings %}
+        <tr>
+            <td><a href="{% url 'resource_detail' booking.resource.pk %}">{{ booking.resource.name }}</a></td>
+            <td>{{ booking.start_datetime|date:"d/m/Y H:i" }}</td>
+            <td>{{ booking.end_datetime|date:"d/m/Y H:i" }}</td>
+            <td>
+                {% if booking.status == 'confirmed' %}
+                    <span class="badge bg-success">Confirmada</span>
+                {% else %}
+                    <span class="badge bg-secondary">Cancelada</span>
+                {% endif %}
+            </td>
+            <td>{{ booking.get_recurrence_display }}</td>
+            <td>
+                {% if booking.status == 'confirmed' %}
+                    <a href="{% url 'booking_cancel' booking.pk %}" class="btn btn-outline-danger btn-sm">Cancelar</a>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p>Todavía no tienes reservas. <a href="{% url 'booking_create' %}">Crea la primera</a>.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Cancelar reserva{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">Cancelar reserva</h1>
+<p>¿Seguro que quieres cancelar la reserva de <strong>{{ booking.resource.name }}</strong> el
+    {{ booking.start_datetime|date:"d/m/Y H:i" }}?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sí, cancelar</button>
+    <a href="{% url 'booking_list' %}" class="btn btn-outline-secondary">Volver</a>
+</form>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Recursos{% endblock %}
+{% block content %}
+<h1 class="h3 mb-4">Recursos disponibles</h1>
+<div class="row">
+    {% for resource in resources %}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ resource.name }}</h5>
+                    <p class="card-text text-muted">{{ resource.location }}</p>
+                    <p class="card-text">{{ resource.description|truncatewords:20 }}</p>
+                    <p class="card-text"><small class="text-muted">Aforo: {{ resource.capacity }}</small></p>
+                    <a href="{% url 'resource_detail' resource.pk %}" class="btn btn-outline-primary btn-sm">Ver disponibilidad</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No hay recursos disponibles todavía.</p>
+    {% endfor %}
+</div>
+{% endblock %}
