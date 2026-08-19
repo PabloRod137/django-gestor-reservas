@@ -1,3 +1,7 @@
+{# Formulario de creación de reserva. Recorremos "form" campo a campo en    #}
+{# vez de imprimir {{ form.as_p }} para poder controlar el HTML/clases de  #}
+{# Bootstrap de cada campo (ver BookingForm.__init__ en bookings/forms.py, #}
+{# que ya les añade la clase form-control/form-select a cada widget).      #}
 {% extends 'base.html' %}
 {% block title %}Nueva reserva{% endblock %}
 {% block content %}

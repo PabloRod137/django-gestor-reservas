@@ -1,3 +1,11 @@
+"""
+URLs propias de la app "bookings".
+
+Se incluyen desde config/urls.py con include('bookings.urls'), montadas en
+la raíz del sitio (''), así que las rutas de aquí abajo son también las
+rutas finales que se ven en el navegador.
+"""
+
 from django.urls import path
 
 from . import views
