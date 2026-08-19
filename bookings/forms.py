@@ -81,7 +81,7 @@ class BookingForm(forms.ModelForm):
         self.fields['end_datetime'].input_formats = ['%Y-%m-%dT%H:%M']
 
         # Igual que en SignUpForm: añadimos las clases de Bootstrap a mano.
-        for name, field in self.fields.items():
+        for field in self.fields.values():
             css_class = 'form-select' if isinstance(field.widget, forms.Select) else 'form-control'
             field.widget.attrs['class'] = css_class
 
