@@ -84,6 +84,14 @@ Y ya puedes abrir **http://127.0.0.1:8000/** en el navegador.
 
 > 💡 Al ser un proyecto de práctica, la base de datos se crea vacía. Entra en `/admin/` con el superusuario que has creado y da de alta algún recurso (por ejemplo, "Sala de reuniones A") para poder probar el flujo de reservas de principio a fin.
 
+### ✅ Tests automatizados
+
+Las reglas de negocio más importantes (no solapar reservas, liberar el hueco al cancelar...) tienen tests:
+
+```bash
+python manage.py test
+```
+
 ## 🔍 Cómo probarlo rápido
 
 1. Crea un recurso desde `/admin/` (o desde el propio admin te deja añadir también sus franjas de disponibilidad, como líneas dentro de la misma pantalla).
